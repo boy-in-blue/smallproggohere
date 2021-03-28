@@ -126,7 +126,6 @@ char *generate_password(int length, int user_friendly)
         int p_iter = 0, wordlen = 0;
         char *w;
         int i = 0;
-        printarray_python(p, 64);
         while (p[p_iter] != 0)
         {
             do
@@ -134,15 +133,13 @@ char *generate_password(int length, int user_friendly)
                 w = words[randint(0, FILESIZE - 1)];
                 wordlen = determine_length(w);
             } while (wordlen != p[p_iter]);
-            for (int j = 0, i; j < p[p_iter]; j++, i++)
+            for (int j = 0; j < p[p_iter]; j++, i++)
             {
                 password[i] = w[j];
             }
             p_iter++;
         }
         free(p);
-        printarraychar(password, length + 1);
-        //printf("Generated Password: %s\n", password);
         password[length] = '\0';
         return password;
     }
@@ -164,7 +161,6 @@ int sumofarray(int arr[], size_t sz)
     for (int i = 0; i < sz; i++)
     {
         sum += arr[i];
-        //printf(" %d ", arr[i]);
     }
     return sum;
 }
