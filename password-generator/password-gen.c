@@ -19,6 +19,7 @@ void printarray(int *arr, size_t sz);
 void zeroarray(int *arr, size_t sz);
 void printarray_python(int *arr, size_t sz);
 int determine_length(char *c);
+void printarraychar(char *arr, size_t sz);
 
 int main(int argc, char const *argv[])
 {
@@ -42,7 +43,9 @@ int main(int argc, char const *argv[])
     int check = 1;
     while (check == 1)
     {
-        printf("Generated Password: %s\n", generate_password(number, human_friendly));
+        char *g = generate_password(number, human_friendly);
+        printf("Generated Password: %s\n", g);
+        free(g);
         printf("Press <enter> to generate new\n");
         getchar();
     }
@@ -123,6 +126,7 @@ char *generate_password(int length, int user_friendly)
         int p_iter = 0, wordlen = 0;
         char *w;
         int i = 0;
+        printarray_python(p, 64);
         while (p[p_iter] != 0)
         {
             do
@@ -136,6 +140,10 @@ char *generate_password(int length, int user_friendly)
             }
             p_iter++;
         }
+        free(p);
+        printarraychar(password, length + 1);
+        //printf("Generated Password: %s\n", password);
+        password[length] = '\0';
         return password;
     }
 }
@@ -191,6 +199,14 @@ void printarray(int *arr, size_t sz)
     for (int i = 0; i < sz; i++)
     {
         printf("%d ==> %d\n", i, arr[i]);
+    }
+}
+
+void printarraychar(char *arr, size_t sz)
+{
+    for (int i = 0; i < sz; i++)
+    {
+        printf("%d ==> %c\n", i, arr[i]);
     }
 }
 
